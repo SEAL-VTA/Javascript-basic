@@ -7,6 +7,42 @@
     <title>Document</title>
 </head>
 <script>
+
+    //...
+    let arr1 = [1, 2, 3, 4, 5];
+    let state = {
+        name: 'SEAL',
+        age: 20,
+        brother: 'Kir'
+    }
+
+    console.log('>>> Chech data arr1', arr1);
+
+    // let name = state.name;
+    // let age = state.age;
+    // let brother = state.brother;
+
+    // let { name, age, brother } = state;
+
+    // const [name, setname] = useState('')
+
+    let arr = ['SEAL', 20];
+    let [name, age]= arr;
+
+    console.log('>>> Check key: ', name, age);
+
+
+
+
+
+
+
+
+
+
+
+
+
     const callBack = (error, data) => {
         if (error) {
             console.log('Calling Callback with error: ', error);
@@ -29,7 +65,7 @@
                     resolve(data);
                 }
                 if (this.readyState === 4 && request.status !== 200) {
-                   reject('Something wrong');
+                    reject('Something wrong with: ' + id);
                 }
             };
             request.open("GET", `https://jsonplaceholder.typicode.com/todos/${id}`, true);
@@ -37,17 +73,86 @@
             request.send();
         })
 
+
     }
 
-    getToDos(1).then(data => {
-        console.log('=>> get data ', data);
 
-        getToDos(2).then(data => {
-            console.log('=>> get data ', data);
-        })
-    }).catch(error => {
-        console.log('=>> ',error)
-    })
+    // const getNewToDo = async (id) => {
+    //     let response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+    //     if(response && response.status !== 200){
+    //         throw new Error('Something wrong with status: ' + response.status);
+    //     }
+    //     let data = await response.json();
+    //     return data;
+
+    // }
+
+
+    const getNewToDo = async (id) => {
+        try {
+            let response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+            let data = await response.json();
+            if (response && response.status !== 200) {
+                throw new Error('Something wrong with status: ' + response.status);
+            }
+            return data;
+        } catch (e) {
+            console.log('>>> Check catch error: ', e.message);
+        }
+
+
+    }
+
+
+    // getNewToDo('adsa').then(data => {
+    //     console.log('>>> Check get data: ', data);
+    // })
+    //     .catch(err => {
+    //         console.log('>>> Check error: ', err.message);
+
+    //     })
+
+
+    // fetch('https://jsonplaceholder.typicode.com/todos/1')
+    // .then (Response => {
+    //     return Response.json();
+    // })
+    // .then(data => {
+    //     console.log('Check fetch data', data);
+    // })
+
+
+
+    // getToDos(1)
+    // .then(data => {
+    //     console.log('>>> get data 1: ', data);
+
+    //     return getToDos(2);
+
+    // }).then(data2 => {
+    //     console.log('>>> get data 2: ', data2);
+    //     return getToDos(3);
+
+    // }).then(data3 => {
+    //     console.log('>>> get data 3: ', data3);
+
+    // })
+
+    // .catch(error => {
+    //     console.log('=>> ',error)
+    // })
+
+
+
+    // getToDos(1).then(data => {
+    //     console.log('=>> get data ', data);
+
+    //     getToDos(2).then(data => {
+    //         console.log('=>> get data ', data);
+    //     })
+    // }).catch(error => {
+    //     console.log('=>> ',error)
+    // })
 
     // getToDos(1, (error, data) => {
     //     if (error) {
